@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+const bottomContainerHeight = 80.0;
+const activeCardColour = Color(0xFF1D1E33);
+const bottomContainerColour = Color(0xFFEB1555);
 
 class InputPage extends StatefulWidget {
   @override
@@ -12,15 +17,72 @@ class _InputPageState extends State<InputPage> {
       appBar: AppBar(
         title: Text('BMI Calculator'),
       ),
-      body: Center(
-        child: Text('Body Text'),
-      ),
-      floatingActionButton: Theme(
-        data: ThemeData(accentColor: Colors.purple),
-        child: FloatingActionButton(
-          child: Icon(Icons.add),
-        ),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: ReusableCard(
+                    colour: activeCardColour,
+                  ),
+                ),
+                Expanded(
+                  child: ReusableCard(
+                    colour: activeCardColour,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: ReusableCard(
+              colour: activeCardColour,
+            ),
+          ),
+          Expanded(
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: ReusableCard(
+                    colour: activeCardColour,
+                  ),
+                ),
+                Expanded(
+                  child: ReusableCard(
+                    colour: activeCardColour,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            color: bottomContainerColour,
+            margin: EdgeInsets.only(top: 10.0),
+            width: double.infinity,
+            height: bottomContainerHeight,
+          )
+        ],
       ),
     );
   }
 }
+
+class ReusableCard extends StatelessWidget {
+  ReusableCard({@required this.colour, this.cardChild});
+  final Color colour;
+  final Widget cardChild;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: cardChild,
+      margin: EdgeInsets.all(15.0),
+      decoration: BoxDecoration(
+        color: colour,
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+    );
+  }
+}
+//0xFF1D1E33
